@@ -1,0 +1,7 @@
+services:
+  frezh:
+    build:
+      context: .
+      dockerfile: frezh.Dockerfile
+    ports:
+      - "8080:8080"
