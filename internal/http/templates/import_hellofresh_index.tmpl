@@ -1,0 +1,16 @@
+<html>
+    <body>
+        Upload a picture of the ingredients:
+        <form enctype="multipart/form-data" action="/import/hellofresh" method="post">
+            <div>
+                <label for="file_ingredients">Select ingredients image</label>
+                <input type="file" name="file_ingredients" />
+            </div>
+            <div>
+                <label for="file_steps">Select recipe steps image</label>
+                <input type="file" name="file_steps" />
+            </div>
+            <button type="submit">Upload</button>
+        </form>
+    </body>
+</html>
