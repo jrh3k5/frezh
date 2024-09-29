@@ -15,6 +15,7 @@ import (
 func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor) error {
 	router := gin.Default()
 	router.LoadHTMLGlob("internal/http/templates/*.tmpl")
+	router.Static("/static", "internal/http/content/static")
 
 	router.Use(gin.Recovery())
 

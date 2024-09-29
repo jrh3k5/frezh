@@ -1,4 +1,7 @@
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
+    </head>
     <body>
         <form action="/recipes/create" action="post">
             <input type="hidden" value="{{ len .ingredient_names }}" name="ingredient_count" />

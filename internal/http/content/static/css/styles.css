@@ -1,0 +1,36 @@
+/* Form elements */
+textarea {
+    min-height: 15em;
+}
+
+input, select, textarea {
+    width: 100%;
+    background-color: #F3F3F3;
+}
+
+/* Tables */
+table {
+    border-collapse:separate;
+    border:solid black 1px;
+    border-radius:6px;
+    width: 100%;
+    background-color: #ADD8E6;
+}
+
+td, th {
+    border-left:solid black 1px;
+    border-top:solid black 1px;
+}
+
+td {
+    background-color: #FFFFFF;
+}
+
+th {
+    border-top: none;
+    background-color: #ADD8E6;
+}
+
+td:first-child, th:first-child {
+     border-left: none;
+}
