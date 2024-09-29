@@ -1,9 +1,16 @@
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
+    </head>
     <body>
+        <h1>Import Hello Fresh</h1>
+        This page allows you to import recipes from Hello Fresh.
+
+        <h1>Ingredients</h1>
         Select a picture of the ingredients and then individually select a picture of each step. Then click "Begin Import".
         <form enctype="multipart/form-data" action="/import/hellofresh" method="post">
             <div>
-                <label for="file_ingredients">Select ingredients image</label>
+                <label class="file" for="file_ingredients">Select ingredients image</label>
                 <input type="file" name="file_ingredients" />
             </div>
             <div id="steps">
@@ -22,7 +29,7 @@
                 document.getElementById("step_count").value = step_count;
                 
                 var newDiv = document.createElement("div");
-                newDiv.innerHTML = `<label for="file_steps_${step_count}">Select step #${step_count} image</label><input type="file" name="file_steps_${step_count}" />`;
+                newDiv.innerHTML = `<label class="file" for="file_steps_${step_count}">Select step #${step_count} image</label><input type="file" name="file_steps_${step_count}" />`;
                 document.getElementById("steps").appendChild(newDiv);
             }
         </script>

@@ -8,6 +8,10 @@ input, select, textarea {
     background-color: #F3F3F3;
 }
 
+label.file {
+    display: block;
+}
+
 /* Tables */
 table {
     border-collapse:separate;
