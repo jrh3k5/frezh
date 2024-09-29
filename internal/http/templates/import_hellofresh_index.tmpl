@@ -1,16 +1,30 @@
 <html>
     <body>
-        Upload a picture of the ingredients:
+        Select a picture of the ingredients and then individually select a picture of each step. Then click "Begin Import".
         <form enctype="multipart/form-data" action="/import/hellofresh" method="post">
             <div>
                 <label for="file_ingredients">Select ingredients image</label>
                 <input type="file" name="file_ingredients" />
             </div>
-            <div>
-                <label for="file_steps">Select recipe steps image</label>
-                <input type="file" name="file_steps" />
+            <div id="steps">
             </div>
-            <button type="submit">Upload</button>
+            <input id="step_count" type="hidden" name="step_count" value="0" />
+            <button type="button" onclick="addStep()">Add Step</button>
+            <button type="submit">Begin Import</button>
         </form>
+        <script type="text/javascript">
+            // some browsers will hold onto this value between page refreshes, so forcibly reset it
+            document.getElementById("step_count").value = 0;
+
+            function addStep() {
+                var step_count = document.getElementById("step_count").value;
+                step_count = parseInt(step_count) + 1;
+                document.getElementById("step_count").value = step_count;
+                
+                var newDiv = document.createElement("div");
+                newDiv.innerHTML = `<label for="file_steps_${step_count}">Select step #${step_count} image</label><input type="file" name="file_steps_${step_count}" />`;
+                document.getElementById("steps").appendChild(newDiv);
+            }
+        </script>
     </body>
 </html>

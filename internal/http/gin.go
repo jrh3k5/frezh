@@ -8,6 +8,8 @@ import (
 	"github.com/jrh3k5/frezh/internal/http/handler"
 	"github.com/jrh3k5/frezh/internal/http/handler/import/hellofresh"
 	"github.com/jrh3k5/frezh/internal/ocr"
+
+	"github.com/jrh3k5/frezh/internal/http/handler/recipes/create"
 )
 
 func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor) error {
@@ -17,8 +19,13 @@ func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor) er
 	router.Use(gin.Recovery())
 
 	router.GET("/", handler.HandleIndex)
+
+	// HelloFresh
 	router.GET("/import/hellofresh", hellofresh.HandleIndex)
 	router.POST("/import/hellofresh", hellofresh.NewIngredientsUploadHandler(chatpgptService, ocrProcessor))
+
+	// Recipes
+	router.GET("/recipes/create", create.HandleIndex)
 
 	err := router.Run(":8080")
 	if err != nil {
