@@ -6,6 +6,7 @@ require (
 	github.com/ayush6624/go-chatgpt v0.3.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/golang/snappy v0.0.4
+	github.com/google/uuid v1.6.0
 	github.com/otiai10/gosseract/v2 v2.4.1
 	gopkg.in/yaml.v2 v2.4.0
 )

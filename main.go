@@ -8,6 +8,7 @@ import (
 	frezhchatgpt "github.com/jrh3k5/frezh/internal/chatgpt"
 	frezhhttp "github.com/jrh3k5/frezh/internal/http"
 	"github.com/jrh3k5/frezh/internal/ocr"
+	"github.com/jrh3k5/frezh/internal/recipes"
 )
 
 func main() {
@@ -25,8 +26,9 @@ func main() {
 
 	chatgptService := frezhchatgpt.NewAyushService(chatgptClient)
 	ocrProcessor := &ocr.Gosseract{}
+	recipesRepository := recipes.NewInMemoryRepository()
 
-	if err := frezhhttp.StartServer(chatgptService, ocrProcessor); err != nil {
+	if err := frezhhttp.StartServer(chatgptService, ocrProcessor, recipesRepository); err != nil {
 		log.Fatalf("failed to start server: %v", err)
 	}
 }

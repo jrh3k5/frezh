@@ -59,8 +59,10 @@ func HandleIndex(c *gin.Context) {
 	}
 
 	c.HTML(http.StatusOK, "recipes_create_index.tmpl", gin.H{
+		"recipe_name":           recipeData.Name,
 		"ingredient_names":      ingredientNames,
 		"ingredient_quantities": ingredientQuantities,
+		"serving_sizes":         servingSizes,
 		"serving_size_labels":   servingSizeLabels,
 		"steps":                 stepsText,
 	})

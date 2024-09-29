@@ -8,11 +8,12 @@ import (
 	"github.com/jrh3k5/frezh/internal/http/handler"
 	"github.com/jrh3k5/frezh/internal/http/handler/import/hellofresh"
 	"github.com/jrh3k5/frezh/internal/ocr"
+	"github.com/jrh3k5/frezh/internal/recipes"
 
 	"github.com/jrh3k5/frezh/internal/http/handler/recipes/create"
 )
 
-func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor) error {
+func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor, recipesRepository recipes.Repository) error {
 	router := gin.Default()
 	router.LoadHTMLGlob("internal/http/templates/*.tmpl")
 	router.Static("/static", "internal/http/content/static")
@@ -27,6 +28,7 @@ func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor) er
 
 	// Recipes
 	router.GET("/recipes/create", create.HandleIndex)
+	router.POST("/recipes/create", create.NewRecipeCreationHandler(recipesRepository))
 
 	err := router.Run(":8080")
 	if err != nil {
