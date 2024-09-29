@@ -7,13 +7,14 @@ import (
 	"github.com/jrh3k5/frezh/internal/chatgpt"
 	"github.com/jrh3k5/frezh/internal/http/handler"
 	"github.com/jrh3k5/frezh/internal/http/handler/import/hellofresh"
+	"github.com/jrh3k5/frezh/internal/http/handler/recipes"
 	"github.com/jrh3k5/frezh/internal/ocr"
-	"github.com/jrh3k5/frezh/internal/recipes"
+	recipesrepo "github.com/jrh3k5/frezh/internal/recipes"
 
 	"github.com/jrh3k5/frezh/internal/http/handler/recipes/create"
 )
 
-func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor, recipesRepository recipes.Repository) error {
+func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor, recipesRepository recipesrepo.Repository) error {
 	router := gin.Default()
 	router.LoadHTMLGlob("internal/http/templates/*.tmpl")
 	router.Static("/static", "internal/http/content/static")
@@ -27,6 +28,7 @@ func StartServer(chatpgptService chatgpt.Service, ocrProcessor ocr.Processor, re
 	router.POST("/import/hellofresh", hellofresh.NewIngredientsUploadHandler(chatpgptService, ocrProcessor))
 
 	// Recipes
+	router.GET("/recipes/:id", recipes.NewRecipeGetHandler(recipesRepository))
 	router.GET("/recipes/create", create.HandleIndex)
 	router.POST("/recipes/create", create.NewRecipeCreationHandler(recipesRepository))
 

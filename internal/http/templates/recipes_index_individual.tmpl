@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
+    </head>
+    <body>
+        <form action="/recipes/create" method="post">
+            <h1>Recipe Name</h1>
+            <div>
+                {{ .recipe_name }}
+            </div>
+            
+            <h1>Ingredients</h1>
+            <table>
+                <thead>
+                    <th>Ingredient Name</th>
+{{ range $serving_size_label_index, $serving_size_label := .serving_size_labels }}
+                    <th>{{ $serving_size_label }}</th>
+{{ end }}
+                </thead>
+                <tbody>
+{{ $ingredient_quantities := .ingredient_quantities }}
+{{ $serving_sizes := .serving_sizes }}
+{{ range $ingredient_name_index, $ingredient_name := .ingredient_names }}
+                    <tr>
+                        <td>{{ $ingredient_name }}</td>
+{{ $ingredient_quantities := (index $ingredient_quantities $ingredient_name_index) }}
+{{ range $ingredient_quantity_index, $ingredient_quantity := $ingredient_quantities }}
+                        <td>{{ $ingredient_quantity }}</td>
+{{ end }}
+                    </tr>
+{{ end }}
+                </tbody>
+            </table>
+
+            <h1>Steps</h1>
+            <table>
+                <thead>
+                    <th>Step Description</th>
+                </thead>
+                <tbody>
+{{ range $step_index, $step := .steps }}
+                    <tr>
+                        <td>
+                            <textarea readonly>{{ $step }}</textarea>
+                        </td>
+                    </tr>
+{{ end }}
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>

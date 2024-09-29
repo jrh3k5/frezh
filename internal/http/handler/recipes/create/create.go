@@ -99,7 +99,7 @@ func getSteps(c *gin.Context) ([]recipes.RecipeStep, error) {
 	}
 
 	var steps []recipes.RecipeStep
-	for i := 1; i <= int(stepCount); i++ {
+	for i := 0; i < int(stepCount); i++ {
 		stepText := c.Request.FormValue(fmt.Sprintf("steps[%d].step_text", i))
 
 		steps = append(steps, recipes.RecipeStep{
